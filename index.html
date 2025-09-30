@@ -1,142 +1,204 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tobajun Works</title>
-  <style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tobajun Works – Gallery</title>
+
+<!-- レトロ寄り見出し＋本文フォント -->
+<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
 :root{
-  /* 彩度は高いが暗めの下地にして文字を読みやすく */
   --bg1:#0b0f1a; --bg2:#11243a;
-  --accent1:#ffcf33;  /* 黄色 */
-  --accent2:#ff5ab3;  /* マゼンタ */
-  --accent3:#34d399;  /* グリーン */
-  --text:#f8fafc;     /* ほぼ白 */
-  --muted:#cbd5e1;    /* 薄グレー */
+  --accent1:#ffcf33; --accent2:#ff5ab3; --accent3:#34d399;
+  --text:#f8fafc; --muted:#cbd5e1;
 }
 
-/* ==== 背景（暗めグラデ + サイケ模様のオーバーレイ） ==== */
+/* 背景（暗め＋サイケ控えめ） */
 body{
   margin:0; color:var(--text);
-  font-family:"Noto Sans JP", system-ui, sans-serif;
-  line-height:1.85;
+  font-family:"Noto Sans JP", system-ui, sans-serif; line-height:1.85;
   background:
     radial-gradient(1200px 800px at 10% -10%, rgba(255,90,179,.35), transparent 50%),
     radial-gradient(1200px 800px at 110% 110%, rgba(52,211,153,.35), transparent 50%),
     linear-gradient(140deg, var(--bg1), var(--bg2));
-  /* ゆるい波アニメ（さりげなく） */
-  background-size: 200% 200%;
-  animation:bgshift 22s ease-in-out infinite;
+  background-size: 200% 200%; animation:bgshift 22s ease-in-out infinite;
 }
-@keyframes bgshift{
-  0%{background-position: 0% 50%}
-  50%{background-position: 100% 50%}
-  100%{background-position: 0% 50%}
-}
+@keyframes bgshift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-/* ==== ヘッダー ==== */
 header{
-  position:sticky; top:0; z-index:10;
-  padding:14px 10px 18px;
-  text-align:center;
-  background:rgba(5,8,14,.55);
-  backdrop-filter:saturate(140%) blur(6px);
+  position:sticky; top:0; z-index:10; padding:14px 10px 18px; text-align:center;
+  background:rgba(5,8,14,.55); backdrop-filter:saturate(140%) blur(6px);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 header h1{
-  margin:4px 0 6px;
-  font-family:"Fugaz One", cursive;
-  font-size: clamp(28px, 6vw, 44px);
-  letter-spacing:.02em;
-  color:var(--accent1);
-  text-shadow:
-    0 2px 0 rgba(0,0,0,.45),
-    0 0 18px rgba(255,207,51,.25);
+  margin:4px 0 6px; font-family:"Fugaz One", cursive;
+  font-size:clamp(28px,6vw,44px); color:var(--accent1);
+  text-shadow:0 2px 0 rgba(0,0,0,.45), 0 0 18px rgba(255,207,51,.25);
 }
 nav{display:flex; gap:18px; justify-content:center; flex-wrap:wrap}
-nav a{
-  color:var(--muted); text-decoration:none; font-weight:600;
-  padding:6px 10px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.10);
-}
-nav a:hover{ color:var(--text); border-color:rgba(255,255,255,.25) }
+nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.1)}
+nav a:hover{color:var(--text); border-color:rgba(255,255,255,.25)}
 
-/* ==== コンテンツ幅・見やすさ ==== */
-main{ max-width: 860px; margin: 28px auto; padding: 0 16px; }
-section{ margin: 28px 0; }
-h2{
-  margin:0 0 10px;
-  font-family:"Fugaz One", cursive;
-  font-size: clamp(22px, 4.8vw, 30px);
-  color:var(--accent2);
-  text-shadow: 0 2px 0 rgba(0,0,0,.45);
-}
-p{ color: var(--muted); }
+main{max-width:1100px; margin:28px auto; padding:0 16px}
+h2{font-family:"Fugaz One", cursive; color:var(--accent2); margin:0 0 8px; font-size:clamp(22px,4.6vw,30px)}
+p{color:var(--muted)}
 
-/* ==== カード ==== */
-.card{
-  background: rgba(255,255,255,.12);  /* 明るめ半透明 */
-  border: 1px solid rgba(255,255,255,.22); /* 薄い縁取りで読みやすく */
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 14px 32px rgba(0,0,0,.25);
+/* フィルタボタン */
+.filters{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 20px}
+.filter-btn{
+  background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,.18);
+  padding:8px 12px; border-radius:999px; font-weight:600
+}
+.filter-btn.active{ color:var(--text); border-color:rgba(255,255,255,.35); box-shadow:0 0 0 2px rgba(255,255,255,.08) inset }
+
+/* ギャラリー：レスポンシブグリッド */
+.gallery{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width:700px){ .gallery{ grid-template-columns: repeat(3, 1fr);} }
+@media (min-width:980px){ .gallery{ grid-template-columns: repeat(4, 1fr);} }
+
+/* タイル */
+.tile{
+  position:relative; overflow:hidden; border-radius:14px;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+}
+.tile img{ width:100%; height:100%; object-fit:cover; aspect-ratio:1/1; display:block; filter:saturate(115%) contrast(105%) }
+.tile .cap{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:8px 10px; font-size:.9rem; color:#fff;
+  background:linear-gradient( to top, rgba(0,0,0,.55), transparent );
 }
 
-/* ==== フッター ==== */
+/* モーダル（拡大表示） */
+.modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.75); backdrop-filter:blur(2px); z-index:50 }
+.modal.open{ display:grid }
+.modal img{ max-width:90vw; max-height:78vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6) }
+.modal .meta{ margin-top:10px; text-align:center; color:var(--muted) }
+.close{ position:absolute; top:14px; right:14px; background:rgba(0,0,0,.5); color:#fff; border:none; border-radius:10px; padding:8px 10px; font-weight:700 }
+
 footer{
-  margin-top:34px; padding:18px 10px;
-  background: rgba(5,8,14,.7);
-  color: var(--muted); text-align:center; font-size:.95rem;
+  margin-top:34px; padding:18px 10px; background:rgba(5,8,14,.7);
+  color:var(--muted); text-align:center; font-size:.95rem;
   border-top:1px solid rgba(255,255,255,.08);
 }
-
-/* アクセント下線（必要ならリンクや小見出しに） */
-.psy-underline{
-  background:
-    linear-gradient(90deg, var(--accent2), var(--accent3));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  text-shadow:none;
-}
-  </style>
+</style>
 </head>
 <body>
-  <header>
-    <h1>Tobajun Works</h1>
-    <nav>
-      <a href="#music">音楽</a>
-      <a href="#life">日常</a>
-      <a href="#contact">連絡先</a>
-    </nav>
-  </header>
+<header>
+  <h1>Tobajun Works</h1>
+  <nav>
+    <a href="#gallery">ギャラリー</a>
+    <a href="#about">自己紹介</a>
+    <a href="#contact">連絡先</a>
+  </nav>
+</header>
 
-  <main>
-    <section id="intro">
-      <h2>自己紹介</h2>
-      <p>ここに簡単な自己紹介を書きます。趣味や活動、やっていることをまとめるサイトです。</p>
-    </section>
+<main>
+  <!-- ヒント文 -->
+  <section id="about">
+    <h2>自己紹介</h2>
+    <p>趣味や日常の写真・作品をまとめたギャラリーサイト。音楽機材、日常のスナップ、ちょっとした制作物などを置いていきます。</p>
+  </section>
 
-    <section id="music">
-      <h2>音楽</h2>
-      <div class="card">
-        <p>ギターや機材レビュー、演奏記録などを載せる予定。</p>
-      </div>
-    </section>
+  <!-- フィルタ -->
+  <section id="gallery">
+    <h2>ギャラリー</h2>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="music">音楽</button>
+      <button class="filter-btn" data-filter="life">日常</button>
+    </div>
 
-    <section id="life">
-      <h2>日常</h2>
-      <div class="card">
-        <p>インテリア、キャンプ、雑多な趣味をまとめる場所。</p>
-      </div>
-    </section>
+    <!-- 画像グリッド（サンプル）。/assets に画像を置いて src を差し替えてね -->
+    <div class="gallery" id="grid">
+      <!-- 音楽 -->
+      <figure class="tile" data-tags="music">
+        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop" alt="ギター" loading="lazy">
+        <figcaption class="cap">ギターの質感テスト</figcaption>
+      </figure>
+      <figure class="tile" data-tags="music">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop" alt="ヘッドホン" loading="lazy">
+        <figcaption class="cap">新しいヘッドホン</figcaption>
+      </figure>
 
-    <section id="contact">
-      <h2>連絡先</h2>
-      <p>メール: <a href="mailto:you@example.com">you@example.com</a></p>
-    </section>
-  </main>
+      <!-- 日常 -->
+      <figure class="tile" data-tags="life">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="街のスナップ" loading="lazy">
+        <figcaption class="cap">夕暮れの街</figcaption>
+      </figure>
+      <figure class="tile" data-tags="life">
+        <img src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=1200&auto=format&fit=crop" alt="コーヒー" loading="lazy">
+        <figcaption class="cap">一息つく時間</figcaption>
+      </figure>
 
-  <footer>
-    <p>© 2025 Tobajun Works</p>
-  </footer>
+      <!-- 追加例（コピペで増やせる） -->
+      <figure class="tile" data-tags="music">
+        <img src="https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?q=80&w=1200&auto=format&fit=crop" alt="シンセ" loading="lazy">
+        <figcaption class="cap">シンセのパッチ</figcaption>
+      </figure>
+      <figure class="tile" data-tags="life">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop" alt="自然" loading="lazy">
+        <figcaption class="cap">緑の散歩道</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>連絡先</h2>
+    <p>メール: <a href="mailto:you@example.com">you@example.com</a></p>
+  </section>
+</main>
+
+<footer>© 2025 Tobajun Works</footer>
+
+<!-- モーダル -->
+<div class="modal" id="modal" aria-hidden="true">
+  <button class="close" id="closeBtn">× 閉じる</button>
+  <img id="modalImg" alt="">
+  <div class="meta" id="modalCap"></div>
+</div>
+
+<script>
+/* 画像クリック→モーダルで拡大 */
+const grid = document.getElementById('grid');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalCap = document.getElementById('modalCap');
+const closeBtn = document.getElementById('closeBtn');
+
+grid.addEventListener('click', e=>{
+  const fig = e.target.closest('.tile');
+  if(!fig) return;
+  const img = fig.querySelector('img');
+  const cap = fig.querySelector('.cap')?.textContent || '';
+  modalImg.src = img.src;
+  modalImg.alt = img.alt || '';
+  modalCap.textContent = cap;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+});
+[closeBtn, modal].forEach(el=>{
+  el.addEventListener('click', e=>{
+    if(e.target===closeBtn || e.target===modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+  });
+});
+addEventListener('keydown', e=>{ if(e.key==='Escape') modal.classList.remove('open'); });
+
+/* フィルタ */
+const btns = document.querySelectorAll('.filter-btn');
+btns.forEach(b=>b.addEventListener('click', ()=>{
+  btns.forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const f = b.dataset.filter;
+  document.querySelectorAll('.tile').forEach(tile=>{
+    const show = f==='all' || tile.dataset.tags.includes(f);
+    tile.style.display = show ? '' : 'none';
+  });
+}));
+</script>
 </body>
 </html>
