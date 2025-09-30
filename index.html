@@ -22,10 +22,12 @@ body{
   font-family: "Noto Sans JP", system-ui, sans-serif;
   line-height: 1.85;
 
-  background: url("file_00000000d26061f88c63d30662386815.png") repeat;
+  /* 同じ階層にあるファイルを参照 */
+  background-image: url("./file_00000000d26061f88c63d30662386815.png?v=2");
+  background-repeat: repeat;
   background-size: 360px;
+
   position: relative;
-}
 }
 /* 白ベールは背景の上・本文の下に */
 body::before{
