@@ -24,6 +24,23 @@ body{
     radial-gradient(1200px 800px at 110% 110%, rgba(52,211,153,.35), transparent 50%),
     linear-gradient(140deg, var(--bg1), var(--bg2));
   background-size: 200% 200%; animation:bgshift 22s ease-in-out infinite;
+  <section id="gallery">
+  <h2>ギャラリー</h2>
+  <div class="grid">
+    <figure class="tile" data-tags="music">
+      <img src="assets/guitar1.jpg" alt="ギターの写真" loading="lazy">
+      <figcaption class="cap">ギターの写真</figcaption>
+    </figure>
+    <figure class="tile" data-tags="daily">
+      <img src="assets/camp1.jpg" alt="キャンプ風景" loading="lazy">
+      <figcaption class="cap">キャンプの様子</figcaption>
+    </figure>
+    <figure class="tile" data-tags="daily">
+      <img src="assets/interior1.jpg" alt="インテリア" loading="lazy">
+      <figcaption class="cap">インテリア</figcaption>
+    </figure>
+  </div>
+</section>
 }
 @keyframes bgshift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
