@@ -16,20 +16,25 @@
 }
 
 /* ===== 背景：花柄 + 白ベール（控えめ） ===== */
-body{
-  margin:0;
-  color:var(--text);
-  font-family:"Noto Sans JP", system-ui, sans-serif;
-  line-height:1.85;
-  background: url("assets/psychedelic-flowers.png") repeat; /* ←必要ならパス変更 */
-  background-size: 360px;
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.85;
+
+  /* 花柄画像（アップロード済みのファイル名に合わせる） */
+  background: url("file_00000000d26061f88c63d30662386815.png") repeat;
+  background-size: 360px; /* ←パターンの大きさ。200〜500で調整可 */
   position: relative;
 }
-body::before{
-  content:"";
-  position:fixed; inset:0;
-  background: rgba(255,255,255,0.6); /* ベール濃さ：0.6（控えめで読みやすい） */
-  z-index:-1;
+
+/* 白ベールを上にかぶせて文字を読みやすくする */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6); /* 数字を大きくするともっと白っぽくなる */
+  z-index: -1;
 }
 
 /* ===== 見出し：60sサイケ（ピンク＋水色） ===== */
@@ -141,9 +146,11 @@ footer{
     <div class="gallery" id="grid">
       <!-- インドア -->
       <figure class="tile" data-tags="indoor">
-        <img src="IMG_20250924_230253.jpg" alt="音楽">
-        <figcaption class="cap">音楽</figcaption>
-      </figure>
+  <a href="music.html">
+    <img src="IMG_20250924_230253.jpg" alt="音楽">
+    <figcaption class="cap">音楽</figcaption>
+  </a>
+</figure>
       <figure class="tile" data-tags="indoor">
         <img src="IMG_20250930_152127.jpg" alt="部屋改造">
         <figcaption class="cap">部屋改造</figcaption>
