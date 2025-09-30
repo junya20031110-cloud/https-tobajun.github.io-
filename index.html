@@ -118,7 +118,7 @@ footer{
   <!-- ヒント文 -->
   <section id="about">
     <h2>自己紹介</h2>
-    <p>趣味や日常の写真・作品をまとめたギャラリーサイト。音楽機材、日常のスナップ、ちょっとした制作物などを置いていきます。</p>
+    <p>色々物は買いますし、趣味もそこそこあるので載せます。</p>
   </section>
 
   <!-- フィルタ -->
@@ -126,33 +126,37 @@ footer{
     <h2>ギャラリー</h2>
     <div class="filters">
       <button class="filter-btn active" data-filter="all">すべて</button>
-      <button class="filter-btn" data-filter="music">アウトドア</button>
-      <button class="filter-btn" data-filter="life">インドア</button>
+      <button class="filter-btn" data-filter="outdoor">アウトドア</button>
+      <button class="filter-btn" data-filter="indoor">インドア</button>
     </div>
 
     <!-- 画像グリッド（サンプル）。/assets に画像を置いて src を差し替えてね -->
     <div class="gallery" id="grid">
       <!-- インドア -->
-      <figure class="tile" data-tags="music">
+      <figure class="tile" data-tags="indoor">
         <img src="IMG_20250924_230253.jpg" alt="写真1" >
         <figcaption class="cap">音楽</figcaption>
       </figure>
-      <figure class="tile" data-tags="music">
+      <figure class="tile" data-tags="indoor">
         <img src="IMG_20250930_152127.jpg" alt="写真3">
         <figcaption class="cap">部屋改造</figcaption>
       </figure>
 
       <!-- アウトドア -->
-      <figure class="tile" data-tags="life">
+      <figure class="tile" data-tags="outdoor">
         <img src="IMG_20250910_141941.jpg" alt="写真3">
         <figcaption class="cap">天体観測</figcaption>
       </figure>
-      <figure class="tile" data-tags="life">
+      <figure class="tile" data-tags="indoor">
         <img src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=1200&auto=format&fit=crop" alt="コーヒー" loading="lazy">
         <figcaption class="cap">キャンプ</figcaption>
       </figure>
 
-      <!-- 追加例（コピペで増やせる） -->
+      <!-- 行動録 -->
+      <figure class="tile" data-tags="all">
+        <img src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=1200&auto=format&fit=crop" alt="コーヒー" loading="lazy">
+        <figcaption class="cap">なんでも</figcaption>
+      </figure>
   
     </div>
   </section>
