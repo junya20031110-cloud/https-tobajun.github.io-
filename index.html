@@ -16,15 +16,16 @@
 
 /* ===== 背景：花柄 + 白ベール（控えめ） ===== */
 body{
-  margin:0;
-  color:var(--text);
-  font-family:"Noto Sans JP", system-ui, sans-serif;
-  line-height:1.85;
+  body {
+  margin: 0;
+  color: var(--text);
+  font-family: "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.85;
 
-  /* GitHubにある実ファイル名。?v=2 でキャッシュ回避 */
-  background: url("file_00000000d26061f88c63d30662386815.png?v=2") repeat;
+  background: url("file_00000000d26061f88c63d30662386815.png") repeat;
   background-size: 360px;
-  position: relative; /* ::before と z-index 整合 */
+  position: relative;
+}
 }
 /* 白ベールは背景の上・本文の下に */
 body::before{
